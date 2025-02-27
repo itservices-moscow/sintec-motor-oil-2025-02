@@ -8,6 +8,7 @@ import cssnanoPlugin from 'cssnano';
 import viteHTMLIncludes from '@kingkongdevs/vite-plugin-html-includes';
 
 import pages from './vitejs/pages.config'
+import { htmlReplacer } from './config/htmlReplacer.js';
 
 const pagesInput = {}
 
@@ -15,6 +16,9 @@ pages.forEach((page => {
     pagesInput[page.name] = page.path
 }));
 
+const replaceArr = [
+  { src: "http://localhost:8189/harper-0.0.1.umd.js", production: "/harper/harper-0.0.1.umd.js" },
+];
 
 export default defineConfig({
   build: {
@@ -29,14 +33,14 @@ export default defineConfig({
         // sourcemap: true,
         assetFileNames: (assetInfo) => {
           if (assetInfo.name == 'app.css') {
-            return 'sintec-motor-oil-2025-02/assets/style.css';
+            return 'assets/style.css';
           }
 
-          return 'sintec-motor-oil-2025-02/assets/'+assetInfo.name;
+          return 'assets/'+assetInfo.name;
         },
         chunkFileNames: (chunkInfo) => {
           console.log(chunkInfo);
-          return "sintec-motor-oil-2025-02/assets/[name].js"
+          return "assets/[name].js"
         }
       }
     }
@@ -67,5 +71,6 @@ export default defineConfig({
       componentsPath: '/src/html/',
       componentsDir: '/src/html/'
     }),
+    htmlReplacer()
   ],
 })

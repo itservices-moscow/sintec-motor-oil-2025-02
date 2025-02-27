@@ -29,14 +29,14 @@ export default defineConfig({
         // sourcemap: true,
         assetFileNames: (assetInfo) => {
           if (assetInfo.name == 'app.css') {
-            return 'assets/style.css';
+            return 'sintec-motor-oil-2025-02/assets/style.css';
           }
 
-          return 'assets/'+assetInfo.name;
+          return 'sintec-motor-oil-2025-02/assets/'+assetInfo.name;
         },
         chunkFileNames: (chunkInfo) => {
           console.log(chunkInfo);
-          return "assets/[name].js"
+          return "sintec-motor-oil-2025-02/assets/[name].js"
         }
       }
     }
@@ -66,6 +66,6 @@ export default defineConfig({
     viteHTMLIncludes({
       componentsPath: '/src/html/',
       componentsDir: '/src/html/'
-    })
+    }),
   ],
 })

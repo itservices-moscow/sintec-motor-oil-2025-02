@@ -11,6 +11,9 @@ export async function htmlReplacer() {
     configResolved(resolvedConfig) {
         config = resolvedConfig;
     },
+    transform() {
+        return { code: transformIndexHtml(), map: undefined };
+    },
     transformIndexHtml() {
       const htmlDir = path.resolve(__dirname, "../dist");
       const files = fs.readdirSync(htmlDir);

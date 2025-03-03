@@ -71,9 +71,13 @@
     display: flex;
     z-index: 2;
 
-    @include mixins.adaptiveValue("max-height", 72.69, 48);
+    @include mixins.adaptiveValue("max-width", 139, 92);
     &:not(:last-child) {
       @include mixins.adaptiveValue("margin-bottom", 40, 35);
+    }
+
+    img {
+      aspect-ratio: 139 / 73;
     }
   }
 
@@ -187,31 +191,61 @@
       .loaded ._watcher-view & {
         opacity: 1;
 
-        &:nth-child(1) {
-          --x: 120%;
-          --y: 6%;
-          z-index: 1;
+        @media (min-width:mixins.toEm(variables.$mobile)){
+          &:nth-child(1) {
+            --x: 120%;
+            --y: 6%;
+            z-index: 1;
+          }
+          &:nth-child(2) {
+            --x: 64%;
+            --y: 4%;
+            z-index: 2;
+          }
+          &:nth-child(4) {
+            --x: -64%;
+            --y: 3.5%;
+            z-index: 2;
+          }
+          &:nth-child(5) {
+            --x: -125%;
+            --y: 2%;
+            z-index: 1;
+          }
+  
+          &:nth-child(3) {
+            --x: 0.01px;
+            --y: 0.01px;
+            z-index: 3;
+          }
         }
-        &:nth-child(2) {
-          --x: 64%;
-          --y: 4%;
-          z-index: 2;
-        }
-        &:nth-child(4) {
-          --x: -64%;
-          --y: 3.5%;
-          z-index: 2;
-        }
-        &:nth-child(5) {
-          --x: -120%;
-          --y: 2%;
-          z-index: 1;
-        }
-
-        &:nth-child(3) {
-          --x: 0.01px;
-          --y: 0.01px;
-          z-index: 3;
+        @media (max-width:mixins.toEm(variables.$mobile)){
+          &:nth-child(1) {
+            --x: 140%;
+            --y: 6%;
+            z-index: 1;
+          }
+          &:nth-child(2) {
+            --x: 74%;
+            --y: 4%;
+            z-index: 2;
+          }
+          &:nth-child(4) {
+            --x: -64%;
+            --y: 3.5%;
+            z-index: 2;
+          }
+          &:nth-child(5) {
+            --x: -134%;
+            --y: 3%;
+            z-index: 1;
+          }
+  
+          &:nth-child(3) {
+            --x: 0.01px;
+            --y: 0.01px;
+            z-index: 3;
+          }
         }
       }
     }
@@ -325,8 +359,6 @@
     max-width: mixins.toRem(652);
     line-height: math.div(60 , 50);
 
-    width: mixins.toRem(651);
-
     @include mixins.adaptiveValue("font-size", 50, 28);
 
     @media (max-width:mixins.toEm(variables.$mobile)){
@@ -342,7 +374,7 @@
   &__container {
     padding-top: mixins.toRem(100);
     padding-bottom: mixins.toRem(100);
-    max-width: mixins.toRem(1325);
+    max-width: mixins.toRem(1320);
     display: grid;
     @include mixins.adaptiveValue("gap", 132, 40);
     
@@ -427,7 +459,9 @@
     background-color: var(--red);
     color: var(--white);
     --bdc: var(--white);
-    scale: 1.03;
+    @media (min-width:mixins.toEm(variables.$mobile)){
+      scale: 1.03;
+    }
   }
 
   &__bg {
@@ -1169,6 +1203,7 @@
     @media (max-width: mixins.toEm(1100)){
       background-color: var(--white);
       --icnsz: #{mixins.toRem(86)};
+      row-gap: mixins.toRem(0);
       &:not(:last-child) {margin-bottom: mixins.toRem(15);}
     }
   }
@@ -1191,11 +1226,18 @@
     span {
       hyphens: auto;
     }
+
+    @media (max-width: mixins.toEm(1100)){
+      margin-top: auto;
+    }
   }
 
   &__text {
     @media (min-width:mixins.toEm(1100)){
       grid-column: span 2;
+    }
+    @media (max-width: mixins.toEm(1100)){
+      margin-bottom: auto;
     }
   }
 
@@ -1212,8 +1254,8 @@
 
     h2 {
       position: absolute;
-      bottom: mixins.toRem(57);
       left: 50%;
+      bottom: mixins.toRem(57);
       translate: -50% 0;
       display: flex;
       flex-direction: column;
@@ -1251,7 +1293,12 @@
       }
 
       h2 {
-        top: 55%;
+        bottom: mixins.toRem(55);
+      }
+    }
+
+    @media (min-width:mixins.toEm(1100)){
+      h2 {
       }
     }
   }
@@ -1459,16 +1506,13 @@
 
   &__track {
     overflow: visible;
-    @media (min-width:mixins.toEm(variables.$mobile)){
-      &:not(:last-child) {margin-bottom: mixins.toRem(5);}
-    }
-    @media (max-width:mixins.toEm(variables.$mobile)){
-      &:not(:last-child) {margin-bottom: mixins.toRem(15);}
-    }
+    &:not(:last-child) {margin-bottom: mixins.toRem(15);}
   }
 
   &__list {
-    align-items: flex-start;
+    @media (max-width:mixins.toEm(variables.$mobile)){
+      align-items: flex-start;
+    }
   }
 
   &__slide {

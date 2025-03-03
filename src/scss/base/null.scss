@@ -1,4 +1,5 @@
 @use "../variables";
+@use "./mixins";
 
 * {
 	padding: 0px;
@@ -21,6 +22,11 @@
 a:focus,
 a:active {
 	// outline: none;
+}
+html {
+  @media (min-width:mixins.toEm(1921)){
+    font-size: calc(1vw / 1.2);
+  }
 }
 html,
 body {

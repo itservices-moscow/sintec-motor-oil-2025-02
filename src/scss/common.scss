@@ -98,16 +98,16 @@ img {
   }
 
   .loaded & {
-    transition: translate 0.3s ease 0s;
+    transition: translate 0.3s ease 0s, box-shadow 0.3s ease 0s;
   }
 
   @media (any-hover: hover){
     &:hover{
       translate: 0 -10%;
       box-shadow: 0px 4px 10px 0px rgba(0, 105, 255, 0.37);
-      // &::before{
-      //   animation: 2s infinite glow-line
-      // }
+      &::before{
+        animation: 2s infinite glow-line
+      }
     }
   }
 

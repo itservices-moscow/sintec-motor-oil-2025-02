@@ -69,6 +69,7 @@
 
   &__logo {
     display: flex;
+    z-index: 2;
 
     @include mixins.adaptiveValue("max-height", 72.69, 48);
     &:not(:last-child) {
@@ -89,7 +90,7 @@
 
     @media (min-width:mixins.toEm(variables.$mobile)){
       --translateCoef: -1;
-      max-width: mixins.vw(1155,1920);
+      max-width: mixins.vw(1155,1320);
       &:not(:last-child) {margin-bottom: mixins.toRem(62);}
     }
     @media (max-width:mixins.toEm(variables.$mobile)){
@@ -142,7 +143,7 @@
 
       &:nth-child(1) {
         --x: 227%;
-        --y: 7%;
+        --y: 6%;
         z-index: 1;
       }
       &:nth-child(2) {
@@ -152,18 +153,20 @@
       }
       &:nth-child(4) {
         --x: -103%;
-        --y: 4%;
+        --y: 3.5%;
         z-index: 2;
       }
       &:nth-child(5) {
         --x: -220%;
-        --y: 6%;
+        --y: 2%;
         z-index: 1;
       }
       @media (min-width:mixins.toEm(variables.$mobile)){
-        &:nth-child(1),
-        &:nth-child(5) {
+        &:nth-child(1) {
           --coef: calc(285 / 313);
+        }
+        &:nth-child(5) {
+          --coef: calc(285 / 300);
         }
         &:nth-child(2),
         &:nth-child(4) {
@@ -186,7 +189,7 @@
 
         &:nth-child(1) {
           --x: 120%;
-          --y: 7%;
+          --y: 6%;
           z-index: 1;
         }
         &:nth-child(2) {
@@ -196,12 +199,12 @@
         }
         &:nth-child(4) {
           --x: -64%;
-          --y: 4%;
+          --y: 3.5%;
           z-index: 2;
         }
         &:nth-child(5) {
           --x: -120%;
-          --y: 6%;
+          --y: 2%;
           z-index: 1;
         }
 
@@ -280,11 +283,13 @@
 }
 //====================================================================================================
 .ow {
+  background-color: var(--light);
+  border-radius: 0 0 mixins.toRem(20) mixins.toRem(20);
 
   &__container {
     max-width: mixins.toRem(1325);
     align-items: center;
-    @include mixins.adaptiveValue("gap", 135, 40, 1920, 767);
+    @include mixins.adaptiveValue("gap", 132, 40, 1320, 767);
     @media (min-width:mixins.toEm(variables.$mobile)){
       display: grid;
       grid-template-columns: 1fr 1.2fr;
@@ -317,8 +322,10 @@
 
   &__text {
     text-transform: uppercase;
-    max-width: mixins.toRem(651);
+    max-width: mixins.toRem(652);
     line-height: math.div(60 , 50);
+
+    width: mixins.toRem(651);
 
     @include mixins.adaptiveValue("font-size", 50, 28);
 
@@ -947,7 +954,7 @@
     justify-content: space-between;
     align-items: center;
     
-    @include mixins.adaptiveValue("column-gap", 370, 300, 1920, 992);
+    @include mixins.adaptiveValue("column-gap", 370, 300, 1320, 992);
     @include mixins.adaptiveValue("padding-top", 55, 35);
 
     @media (min-width:mixins.toEm(variables.$tablet)){
@@ -960,6 +967,7 @@
   }
 
   &__left {
+    align-self: stretch;
     @media (min-width:mixins.toEm(variables.$tablet)){
       max-width: mixins.toRem(427);
     }
@@ -974,7 +982,7 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      translate: -50% -50%;
+      translate: -63% -50%;
     }
 
     @include mixins.adaptiveValue("height", 399, 308);
@@ -1044,7 +1052,7 @@
     width: 100%;
     position: relative;
     @include mixins.adaptiveValue("--img_width", 118, 95);
-    @include mixins.adaptiveValue("--mb", 70, 30, 1920, 992);
+    @include mixins.adaptiveValue("--mb", 70, 30, 1320, 992);
     &::after{
       content:'';
       position: absolute;
@@ -1070,7 +1078,7 @@
         translate: 0 -50%;
         height: mixins.toRem(3);
         background-color: var(--gold);
-        width: mixins.toRem(50);
+        width: mixins.toRem(100);
       }
       &:last-child {
         &::after{
@@ -1195,7 +1203,6 @@
     position: relative;
     @media (min-width:mixins.toEm(1100)){
       margin-top: mixins.toRem(-39.5);
-      margin-bottom: mixins.toRem(-39.5);
     }
 
     i {
@@ -1205,15 +1212,15 @@
 
     h2 {
       position: absolute;
-      top: 50%;
+      bottom: mixins.toRem(57);
       left: 50%;
-      translate: -50% -50%;
+      translate: -50% 0;
       display: flex;
       flex-direction: column;
       text-align: center;
       line-height: math.div(28.25 , 23.54);
 
-      @include mixins.adaptiveValue("font-size", 23.54, 18, 1920, 1100);
+      @include mixins.adaptiveValue("font-size", 23.54, 18, 1320, 1100);
       @include mixins.adaptiveValue("gap", 5, 4);
 
       ._blue {
@@ -1221,7 +1228,7 @@
         line-height: math.div(63.57 , 52.97);
         font-weight: 500;
 
-        @include mixins.adaptiveValue("font-size", 52.97, 38.66, 1920, 1100);
+        @include mixins.adaptiveValue("font-size", 52.97, 38.66, 1320, 1100);
       }
     }
 
@@ -1327,11 +1334,11 @@
   background-color: var(--light);
   display: grid;
 
-  @include mixins.adaptiveValue("padding-left", 25, 17.5, 1920, 767);
-  @include mixins.adaptiveValue("padding-right", 25, 17.5, 1920, 767);
-  @include mixins.adaptiveValue("padding-bottom", 25, 0, 1920, 767);
-  @include mixins.adaptiveValue("padding-top", 30, 20, 1920, 767);
-  @include mixins.adaptiveValue("border-radius", 20, 10, 1920, 767);
+  @include mixins.adaptiveValue("padding-left", 25, 17.5, 1320, 767);
+  @include mixins.adaptiveValue("padding-right", 25, 17.5, 1320, 767);
+  @include mixins.adaptiveValue("padding-bottom", 25, 0, 1320, 767);
+  @include mixins.adaptiveValue("padding-top", 30, 20, 1320, 767);
+  @include mixins.adaptiveValue("border-radius", 20, 10, 1320, 767);
   @include mixins.adaptiveValue("gap", 60, 25);
 
   @media (min-width:mixins.toEm(variables.$mobile)){
@@ -1581,7 +1588,7 @@
     padding-right: mixins.toRem(20);
 
     @include mixins.adaptiveValue("padding-top", 65, 50);
-    @include mixins.adaptiveValue("gap", 79, 30, 1920, 767);
+    @include mixins.adaptiveValue("gap", 79, 30, 1320, 767);
 
     @media (max-width:mixins.toEm(variables.$mobile)){
       flex-direction: column;

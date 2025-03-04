@@ -115,6 +115,10 @@ img {
     background-color: var(--white);
     color: var(--ozon);
     font-weight: 500;
+    &::before{
+      // #0069FF
+      background: linear-gradient(120deg, transparent, rgba(0, 106, 255, 0.5), transparent);
+    }
   }
 }
 

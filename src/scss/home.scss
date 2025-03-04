@@ -1068,9 +1068,7 @@
 
   &__button {
     margin-top: auto;
-    @media (max-width:mixins.toEm(variables.$tablet)){
-      max-width: mixins.toRem(285);
-    }
+    width: max-content;
   }
 }
 .right-tech {

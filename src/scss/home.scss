@@ -372,8 +372,8 @@
 .advantages {
 
   &__container {
-    padding-top: mixins.toRem(100);
-    padding-bottom: mixins.toRem(100);
+    padding-top: mixins.toRem(140);
+    padding-bottom: mixins.toRem(140);
     max-width: mixins.toRem(1320);
     display: grid;
     @include mixins.adaptiveValue("gap", 132, 40);
@@ -1305,8 +1305,8 @@
 .evidence {
 
   &__container {
-    padding-top: mixins.toRem(100);
-    padding-bottom: mixins.toRem(50);
+    padding-top: mixins.toRem(140);
+    padding-bottom: mixins.toRem(70);
     max-width: mixins.toRem(1320);
   }
 
@@ -1319,6 +1319,13 @@
     text-transform: uppercase;
 
     @include mixins.adaptiveValue("font-size", 50, 32);
+
+    @media (min-width:mixins.toEm(variables.$mobile)){
+      &:not(:last-child) {margin-bottom: mixins.toRem(10);}
+    }
+    @media (max-width:mixins.toEm(variables.$mobile)){
+      &:not(:last-child) {margin-bottom: mixins.toRem(20);}
+    }
   }
 
   &__subtitle {
@@ -1485,7 +1492,7 @@
 
   &__container {
     max-width: mixins.toRem(1320);
-    padding-top: mixins.toRem(50);
+    padding-top: mixins.toRem(70);
 
     @include mixins.adaptiveValue("padding-bottom", 100, 84);
   }

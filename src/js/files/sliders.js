@@ -50,6 +50,9 @@ function initSliders() {
       perMove: 1,
       perPage: 1,
       autoWidth: true,
+      dragMinThreshold: {
+        touch: 40
+      }
     })
 
     let bar = splide.root.querySelector('.assort__progress i');

@@ -2,10 +2,16 @@
 @use "sass:math";
 @use "variables";
 //====================================================================================================
+:root {
+  --globalAnimDuration: 0.7s;
+  --globalAnimDelay: 0.05s;
+  // --globalTransitionTiming: cubic-bezier(.67,.17,.51,1.11);
+  --globalTransitionTiming: ease;
+}
 .hero {
   position: relative;
-  --animDuration: 0.7s;
-  --animDelay: 0.05s;
+  --animDuration: var(--globalAnimDuration);
+  --animDelay: var(--globalAnimDelay);
   @media (max-width:mixins.toEm(variables.$mobile)){
     --animDuration: 0.5s;
     --animDelay: 0.1s;
@@ -338,6 +344,13 @@
   &__image {
     border-radius: mixins.toRem(20);
     overflow: hidden;
+    opacity: 0;
+    translate: 0 mixins.toRem(30);
+    .loaded & {
+      transition: 
+        translate var(--globalAnimDuration) var(--globalTransitionTiming),
+        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+    }
     img {
       width: 100%;
       height: 100%;
@@ -351,6 +364,14 @@
     @media (max-width:mixins.toEm(variables.$mobile)){
       margin: 0 mixins.toRem(-15);
       aspect-ratio: 375 / 244;
+      .loaded & {
+        transition-delay: var(--globalAnimDuration);
+      }
+    }
+
+    .loaded ._watcher-view & {
+      opacity: 1;
+      translate: 0 0;
     }
   }
 
@@ -365,6 +386,32 @@
       text-align: center;
       display: flex;
       flex-direction: column;
+    }
+
+    span {
+      opacity: 0;
+      translate: 0 mixins.toRem(30);
+      display: block;
+      .loaded & {
+        transition: 
+          translate var(--globalAnimDuration) var(--globalTransitionTiming),
+          opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+        @media (min-width:mixins.toEm(variables.$mobile)){
+          transition-delay: var(--globalAnimDuration);
+          &._gold {
+            transition-delay: calc(var(--globalAnimDuration) / 2);
+          }
+        }
+        @media (max-width:mixins.toEm(variables.$mobile)){
+          &:not(._gold) {
+            transition-delay: calc(var(--globalAnimDuration) / 2);
+          }
+        }
+      }
+      .loaded ._watcher-view & {
+        opacity: 1;
+        translate: 0 0;
+      }
     }
   }
 }
@@ -393,18 +440,41 @@
     text-transform: uppercase;
     font-weight: 500;
     line-height: math.div(15 , 22);
+    opacity: 0;
+    translate: 0 mixins.toRem(30);
 
     @media (max-width:mixins.toEm(variables.$mobile)){
       line-height: math.div(25 , 18);
     }
     @include mixins.adaptiveValue("font-size", 22, 18);
+    .loaded & {
+      transition: 
+        translate var(--globalAnimDuration) var(--globalTransitionTiming),
+        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+    }
+    .loaded ._watcher-view & {
+      opacity: 1;
+      translate: 0 0;
+    }
   }
 
   &__title {
     text-transform: uppercase;
     line-height: math.div(60 , 50);
+    opacity: 0;
+    translate: 0 mixins.toRem(30);
 
     @include mixins.adaptiveValue("font-size", 50, 30);
+    .loaded & {
+      transition: 
+        translate var(--globalAnimDuration) var(--globalTransitionTiming),
+        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+        transition-delay: calc(var(--globalAnimDuration) / 2);
+    }
+    .loaded ._watcher-view & {
+      opacity: 1;
+      translate: 0 0;
+    }
   }
 
   &__body {
@@ -416,7 +486,8 @@
     @media (max-width:mixins.toEm(variables.$mobile)){
       display: flex;
       padding-bottom: mixins.toRem(15);
-      overflow: auto;
+      overflow-x: auto;
+      overflow-y: hidden;
       scroll-snap-type: x mandatory;
       margin-right: mixins.toRem(-15);
       padding-right: mixins.toRem(15);
@@ -427,6 +498,12 @@
   }
 
   &__item {
+    .loaded & {
+      transition: 
+        translate var(--globalAnimDuration) var(--globalTransitionTiming),
+        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+      transition-delay: calc(0);
+    }
     @media (max-width:mixins.toEm(variables.$mobile)){
       flex: 1 0 mixins.toRem(227);
       scroll-snap-align: start;
@@ -437,6 +514,8 @@
   background-color: var(--light);
   border-radius: mixins.toRem(15);
   padding: mixins.toRem(20);
+  opacity: 0;
+  translate: 0 mixins.toRem(30);
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -453,7 +532,15 @@
   }
 
   .loaded & {
-    transition: background-color 0.3s ease 0s, scale 0.3s ease 0s;
+    transition: 
+      background-color 0.3s ease 0s, 
+      scale 0.3s ease 0s,
+      translate var(--globalAnimDuration) var(--globalTransitionTiming),
+      opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+    
+    --delay: calc((var(--globalAnimDuration) / 4) * var(--index, 1) + (var(--globalAnimDuration) / 3));
+      
+    transition-delay: 0s, 0s, var(--delay), var(--delay);
   }
   &:hover{
     background-color: var(--red);
@@ -462,6 +549,10 @@
     @media (min-width:mixins.toEm(variables.$mobile)){
       scale: 1.03;
     }
+  }
+  .loaded ._watcher-view & {
+    opacity: 1;
+    translate: 0 0;
   }
 
   &__bg {
@@ -1021,7 +1112,11 @@
 
     @include mixins.adaptiveValue("height", 399, 308);
     img {
-      height: 100%;
+      &:not(.tech__light) {
+        height: 100%;
+        position: relative;
+        z-index: 2;
+      }
     }
 
     @media (max-width:mixins.toEm(variables.$tablet)){
@@ -1030,6 +1125,14 @@
       justify-content:center;align-items: center;
       &:not(:last-child) {margin-bottom: mixins.toRem(30);}
     }
+  }
+
+  &__light {
+    position: absolute;
+    height: mixins.toRem(520);
+    top: 50%;
+    left: 60.5%;
+    translate: -50% -50%;
   }
 
   &__right {
@@ -1052,16 +1155,43 @@
 
   &__subtitle {
     font-weight: 500;
+    opacity: 0;
+    translate: 0 mixins.toRem(30);
     @include mixins.adaptiveValue("font-size", 22, 18);
+    .loaded & {
+      transition: 
+        translate var(--globalAnimDuration) var(--globalTransitionTiming),
+        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+    }
 
     @media (min-width:mixins.toEm(variables.$tablet)){
       line-height: math.div(15 , 22);
+    }
+
+    .loaded ._watcher-view & {
+      opacity: 1;
+      translate: 0 0;
     }
   }
 
   &__title {
     text-transform: uppercase;
     line-height: math.div(54 , 45);
+    opacity: 0;
+    translate: 0 mixins.toRem(30);
+
+    .loaded & {
+      transition: 
+        translate var(--globalAnimDuration) var(--globalTransitionTiming),
+        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+
+      transition-delay: calc(var(--globalAnimDuration) / 2);
+    }
+
+    .loaded ._watcher-view & {
+      opacity: 1;
+      translate: 0 0;
+    }
 
     @include mixins.adaptiveValue("font-size", 45, 32);
   }
@@ -1073,6 +1203,10 @@
 }
 .right-tech {
   width: 100%;
+
+  &__itemwrap {
+    
+  }
 
   &__item {
     color: var(--white);
@@ -1180,6 +1314,8 @@
   }
 
   &__item {
+    opacity: 0;
+    translate: 0 mixins.toRem(30);
     --icnsz: #{mixins.toRem(100)};
     border-radius: mixins.toRem(10);
     display: grid;
@@ -1203,6 +1339,18 @@
       --icnsz: #{mixins.toRem(86)};
       row-gap: mixins.toRem(0);
       &:not(:last-child) {margin-bottom: mixins.toRem(15);}
+    }
+    .loaded & {
+      transition: 
+        translate var(--globalAnimDuration) var(--globalTransitionTiming),
+        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+
+      transition-delay: calc(var(--globalAnimDuration) / 2);
+    }
+    
+    .loaded ._watcher-view & {
+      opacity: 1;
+      translate: 0 0;
     }
   }
 
@@ -1241,8 +1389,18 @@
 
   &__graph {
     position: relative;
+    opacity: 0;
+    translate: 0 mixins.toRem(30);
     @media (min-width:mixins.toEm(1100)){
       margin-top: mixins.toRem(-39.5);
+    }
+    @media (max-width: mixins.toEm(1100)){
+      margin-bottom: mixins.toRem(14);
+    }
+    .loaded & {
+      transition: 
+        translate var(--globalAnimDuration) var(--globalTransitionTiming),
+        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
     }
 
     i {
@@ -1295,9 +1453,9 @@
       }
     }
 
-    @media (min-width:mixins.toEm(1100)){
-      h2 {
-      }
+    .loaded ._watcher-view & {
+      opacity: 1;
+      translate: 0 0;
     }
   }
 }
@@ -1315,10 +1473,18 @@
   }
 
   &__title {
+    opacity: 0;
+    translate: 0 mixins.toRem(30);
     line-height: math.div(60 , 50);
     text-transform: uppercase;
 
     @include mixins.adaptiveValue("font-size", 50, 32);
+
+    .loaded & {
+      transition: 
+        translate var(--globalAnimDuration) var(--globalTransitionTiming),
+        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+    }
 
     @media (min-width:mixins.toEm(variables.$mobile)){
       &:not(:last-child) {margin-bottom: mixins.toRem(10);}
@@ -1326,14 +1492,49 @@
     @media (max-width:mixins.toEm(variables.$mobile)){
       &:not(:last-child) {margin-bottom: mixins.toRem(20);}
     }
+
+    .loaded ._watcher-view & {
+      opacity: 1;
+      translate: 0 0;
+    }
   }
 
   &__subtitle {
+    opacity: 0;
+    translate: 0 mixins.toRem(30);
     font-size: mixins.toRem(22);
     line-height: math.div(30.8 , 22);
 
     @media (min-width:mixins.toEm(variables.$mobile)){
       color: var(--dark_grey);
+    }
+    .loaded & {
+      transition: 
+        translate var(--globalAnimDuration) var(--globalTransitionTiming),
+        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+
+      transition-delay: calc(var(--globalAnimDuration) / 2);
+    }
+
+    .loaded ._watcher-view & {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  &__body {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    margin-right: mixins.toRem(-15);
+    padding-right: mixins.toRem(15);
+
+    @include mixins.adaptiveValue("gap", 20, 10);
+
+    &::-webkit-scrollbar {
+      display: none;
     }
   }
 
@@ -1348,9 +1549,6 @@
   }
 
   &__list {
-  }
-
-  &__item {
   }
 
   &__progress {
@@ -1379,7 +1577,25 @@
   }
 
   &__item {
+    scroll-snap-align: start;
+    opacity: 0;
+    translate: 0 mixins.toRem(30);
+
     @include mixins.adaptiveValue("max-width", 985, 285);
+
+    .loaded & {
+      transition: 
+        translate var(--globalAnimDuration) var(--globalTransitionTiming),
+        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+
+      --delay: calc((var(--globalAnimDuration) / 4) * var(--index, 1) + (var(--globalAnimDuration) / 2));
+      transition-delay: var(--delay);
+    }
+
+    .loaded ._watcher-view & {
+      opacity: 1;
+      translate: 0 0;
+    }
   }
 }
 .item-evidence {
@@ -1391,39 +1607,62 @@
   @include mixins.adaptiveValue("padding-bottom", 25, 0, 1320, 767);
   @include mixins.adaptiveValue("padding-top", 30, 20, 1320, 767);
   @include mixins.adaptiveValue("border-radius", 20, 10, 1320, 767);
-  @include mixins.adaptiveValue("gap", 60, 25);
 
   @media (min-width:mixins.toEm(variables.$mobile)){
-    grid-template-columns: 1.18fr 1fr;
+    gap: mixins.toRem(20);
+  }
+  @media (max-width:mixins.toEm(variables.$mobile)){
+    gap: mixins.toRem(25);
   }
 
+  // @media (min-width:mixins.toEm(variables.$mobile)){
+  //   grid-template-columns: 1.18fr 1fr;
+  // }
+
   &__head {
+    @media (min-width:mixins.toEm(variables.$mobile)){
+      display: flex;
+      align-items: flex-end;
+      gap: mixins.toRem(20);
+      &:not(:last-child) {margin-bottom: mixins.toRem(20);}
+    }
   }
 
   &__title {
-    line-height: math.div(87 , 72.5);
+    line-height: math.div(52, 60);
     white-space: nowrap;
 
-    @include mixins.adaptiveValue("font-size", 72.5, 39.62);
+    @include mixins.adaptiveValue("font-size", 60, 39.62);
 
     @media (min-width:mixins.toEm(variables.$mobile)){
       color: var(--red);
+    }
+    @media (max-width:mixins.toEm(variables.$mobile)){
+      line-height: 1.2;
     }
   }
 
   &__subtitle {
     line-height: math.div(26.4 , 22);
 
-    @include mixins.adaptiveValue("font-size", 22, 14);
-    @include mixins.adaptiveValue("padding-left", 55, 28);
+    @include mixins.adaptiveValue("font-size", 18, 14);
+    @include mixins.adaptiveValue("padding-left", 34.85, 28, 767, 375, 3);
+
+    @media (min-width:mixins.toEm(variables.$mobile)){
+      color: var(--dark_grey);
+    }
   }
 
   &__text {
+    @media (min-width:mixins.toEm(variables.$mobile)){
+      display: flex;
+      align-items: flex-end;
+      gap: mixins.toRem(20);
+    }
     b {
-      display: block;
       font-weight: 400;
       line-height: math.div(26.4 , 22);
-      @include mixins.adaptiveValue("font-size", 22, 16);
+      color: var(--red);
 
       &:not(:last-child) {
         @include mixins.adaptiveValue("margin-bottom", 10, 5);
@@ -1433,18 +1672,17 @@
     p {
       color: var(--dark_grey);
       line-height: math.div(21.6 , 18);
-      &:not(:last-child) {
-        @include mixins.adaptiveValue("margin-bottom", 10, 15);
-      }
       @media (min-width:mixins.toEm(variables.$mobile)){
         max-width: mixins.toRem(390);
       }
       @media (max-width:mixins.toEm(variables.$mobile)){
         max-width: mixins.toRem(250);
+        &:not(:last-child) {margin-bottom: mixins.toRem(15);}
       }
     }
 
     a {
+      white-space: nowrap;
       @include mixins.adaptiveValue("font-size", 16, 14);
     }
   }
@@ -1459,9 +1697,9 @@
       z-index: 1;
     }
 
-    @media (min-width:mixins.toEm(variables.$mobile)){
-      grid-column: span 2;
-    }
+    // @media (min-width:mixins.toEm(variables.$mobile)){
+    //   grid-column: span 2;
+    // }
     @media (max-width:mixins.toEm(variables.$mobile)){
       margin: 0 mixins.toRem(-17.5);
     }
@@ -1484,6 +1722,7 @@
       color: var(--red);
       font-size: mixins.toRem(16);
       line-height: math.div(19 , 16);
+      &:not(:last-child) {margin-bottom: mixins.toRem(4);}
     }
   }
 }
@@ -1498,12 +1737,25 @@
   }
 
   &__title {
+    opacity: 0;
+    translate: 0 mixins.toRem(30);
     text-transform: uppercase;
     line-height: math.div(60 , 50);
 
     @include mixins.adaptiveValue("font-size", 50, 32);
 
     &:not(:last-child) {margin-bottom: mixins.toRem(15);}
+
+    .loaded & {
+      transition: 
+        translate var(--globalAnimDuration) var(--globalTransitionTiming),
+        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+    }
+
+    .loaded ._watcher-view & {
+      opacity: 1;
+      translate: 0 0;
+    }
   }
 
   &__slider {
@@ -1529,11 +1781,27 @@
     border: mixins.toRem(1) solid var(--light_grey);
     border-radius: mixins.toRem(10);
     padding: mixins.toRem(20);
+    opacity: 0;
+    translate: 0 mixins.toRem(30);
 
     @include mixins.adaptiveValue("width", 427, 285);
     @media (max-width:mixins.toEm(variables.$mobile)){
       padding-bottom: mixins.toRem(25);
       gap: mixins.toRem(25);
+    }
+
+    .loaded & {
+      transition: 
+        translate var(--globalAnimDuration) var(--globalTransitionTiming),
+        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+
+      --delay: calc((var(--globalAnimDuration) / 4) * var(--index, 1) + (var(--globalAnimDuration) / 2));
+      transition-delay: var(--delay);
+    }
+
+    .loaded ._watcher-view & {
+      opacity: 1;
+      translate: 0 0;
     }
   }
 
@@ -1597,6 +1865,21 @@
     border-radius: calc(1px / 0);
     position: relative;
     overflow: hidden;
+    opacity: 0;
+    translate: 0 mixins.toRem(30);
+
+    .loaded & {
+      transition: 
+        translate var(--globalAnimDuration) var(--globalTransitionTiming),
+        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+
+      transition-delay: 1.1s;
+    }
+
+    .loaded ._watcher-view & {
+      opacity: 1;
+      translate: 0 0;
+    }
 
     i {
       position: absolute;
@@ -1615,7 +1898,7 @@
 //==========================================================================================
 .ozon {
   .loaded & {
-    transition: all 0.3s ease 0s;
+    transition: all var(--globalAnimDuration) var(--globalTransitionTiming);
   }
   @media (min-width:mixins.toEm(variables.$mobile)){
     border-radius: mixins.toRem(20) mixins.toRem(20) 0 0;
@@ -1646,6 +1929,8 @@
   }
 
   &__title {
+    opacity: 0;
+    translate: 0 mixins.toRem(30);
     color: var(--white);
     text-transform: uppercase;
     line-height: math.div(33.8 , 26);
@@ -1654,12 +1939,38 @@
     }
 
     @include mixins.adaptiveValue("font-size", 32, 26);
+
+    .loaded & {
+      transition: 
+        translate var(--globalAnimDuration) var(--globalTransitionTiming),
+        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+    }
+
+    .loaded ._watcher-view & {
+      opacity: 1;
+      translate: 0 0;
+    }
   }
 
   &__button {
     width: 100%;
     max-width: mixins.toRem(427);
     border-radius: mixins.toRem(7.84);
+    opacity: 0;
+    translate: 0 mixins.toRem(30);
+
+    .loaded & {
+      transition: 
+        translate var(--globalAnimDuration) var(--globalTransitionTiming),
+        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+
+      transition-delay: calc(var(--globalAnimDuration) / 2);
+    }
+
+    .loaded ._watcher-view & {
+      opacity: 1;
+      translate: 0 0;
+    }
 
     @include mixins.adaptiveValue("font-size", 32, 18);
     @include mixins.adaptiveValue("height", 69, 58);
@@ -1692,6 +2003,23 @@
   &__col {
     display: flex;
     flex-direction: column;
+    opacity: 0;
+    translate: 0 mixins.toRem(30);
+
+    .loaded & {
+      transition: 
+        translate var(--globalAnimDuration) var(--globalTransitionTiming),
+        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+      
+      &:last-child {
+        transition-delay: var(--globalAnimDuration);
+      }
+    }
+
+    .loaded ._watcher-view & {
+      opacity: 1;
+      translate: 0 0;
+    }
 
     a {
       display: block;
@@ -1718,6 +2046,16 @@
 
   &__logo {
     height: mixins.toRem(57);
+    opacity: 0;
+    translate: 0 mixins.toRem(30);
+
+    .loaded & {
+      transition: 
+        translate var(--globalAnimDuration) var(--globalTransitionTiming),
+        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+
+      transition-delay: calc(var(--globalAnimDuration) / 2);
+    }
 
     img {
       height: 100%;
@@ -1725,6 +2063,11 @@
 
     @media (max-width:mixins.toEm(variables.$mobile)){
       order: -1;
+    }
+
+    .loaded ._watcher-view & {
+      opacity: 1;
+      translate: 0 0;
     }
   }
 }

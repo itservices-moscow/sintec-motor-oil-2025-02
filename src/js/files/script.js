@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
   if (mmd1.matches) {
     setSvgWH();
   }
+
+  setIndex('.item-advantages');
+  setIndex('.item-evidence');
+  setIndex('.assort__slide');
 })
 
 
@@ -38,5 +42,14 @@ function setSvgWH() {
       // svg.style.setProperty('flex-basis', `${widthRem}rem`)
       svg.style.setProperty('min-height', `${heightRem}rem`)
     }
+  })
+}
+
+function setIndex(selector) {
+  const items = document.querySelectorAll(selector);
+  if (!items.length) return;
+
+  items.forEach((el, i)=>{
+    el.style.setProperty('--index', i+1);
   })
 }

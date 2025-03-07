@@ -65,7 +65,7 @@
             </div>
           </div>
         </section>
-        <section class="ow">
+        <section class="ow" data-watch data-watch-once data-watch-threshold="0.5">
           <div class="ow__container">
             <div class="ow__image">
               <img src="img/ow_mob.png" alt="ow_mob">
@@ -77,7 +77,7 @@
             </h2>
           </div>
         </section>
-        <section class="advantages">
+        <section class="advantages" data-watch data-watch-once data-watch-threshold="0.2">
           <div class="advantages__container">
             <div class="advantages__head">
               <div class="advantages__subtitle _gold">ПРОДУКТЫ 0w&#8209;ХХ</div>
@@ -287,12 +287,12 @@
                   </div>
                   <div class="item-advantages__index">05</div>
                 </div>
-                <div class="item-advantages__text">отличной устойчивости к скоростному сдвигу</div>
+                <div class="item-advantages__text">отличной <br>устойчивости к скоростному сдвигу</div>
               </div>
             </div>
           </div>
         </section>
-        <section class="tech">
+        <section class="tech" data-watch data-watch-once data-watch-threshold="1">
           <div class="tech__bgs">
             <div class="tech__leftbg">
               <img src="img/tech_bg.png" alt="tech_bg">
@@ -312,20 +312,25 @@
             <div class="tech__middle">
               <img src="img/tech_img.png" alt="tech_img" class="_md2dn">
               <img src="img/tech_img_mob.png" alt="tech_img_mob" class="_mmd2dn">
+              <img src="/public/img/tech_light.png" alt="tech__light" class="tech__light _md3dn">
             </div>
             <div class="tech__right right-tech">
-              <div class="right-tech__item">
+              <div class="right-tech__itemwrap">
                 <div class="right-tech__image"><img src="img/tech_item_1.png" alt="tech_item_1"></div>
-                <div class="right-tech__text">Высококачественная <br> синтетическая база</div>
+                <div class="right-tech__item">
+                  <div class="right-tech__text">Высококачественная <br> синтетическая база</div>
+                </div>
               </div>
-              <div class="right-tech__item">
+              <div class="right-tech__itemwrap">
                 <div class="right-tech__image"><img src="img/tech_item_2.png" alt="tech_item_2"></div>
-                <div class="right-tech__text">Присадки <br> от мировых лидеров</div>
+                <div class="right-tech__item">
+                  <div class="right-tech__text">Присадки <br> от мировых лидеров</div>
+                </div>
               </div>
             </div>
           </div>
         </section>
-        <section class="easystart">
+        <section class="easystart" data-watch data-watch-once data-watch-threshold="0.5">
           <div class="easystart__container">
             <div class="easystart__item">
               <div class="easystart__icon">
@@ -415,13 +420,13 @@
             </div>
           </div>
         </section>
-        <section class="evidence">
+        <section class="evidence" data-watch data-watch-once data-watch-threshold="0.2">
           <div class="evidence__container">
             <div class="evidence__head">
               <h2 class="evidence__title">Доказано результатами <br>эксплуатации масла</h2>
               <div class="evidence__subtitle">Надёжная защита двигателя на всем сроке эксплуатации</div>
             </div>
-            <div class="splide evidence__slider">
+            <!-- <div class="splide evidence__slider">
               <div class="splide__track evidence__track">
                 <div class="splide__list evidence__list">
                   <div class="evidence__item item-evidence splide__slide" data-da-parent>
@@ -458,13 +463,45 @@
                   </div>
                 </div>
               </div>
-              <!-- <div class="evidence__progress">
+              <div class="evidence__progress">
                 <i></i>
-              </div> -->
+              </div>
+            </div> -->
+            <div class="evidence__body">
+              <div class="evidence__item item-evidence" data-da-parent>
+                <div class="item-evidence__head">
+                  <div class="item-evidence__title">>100 000 км</div>
+                  <div class="item-evidence__subtitle">пробега <br class="_md3dn"> на масле SINTEC</div>
+                </div>
+                <div class="item-evidence__text">
+                  <p><b>Результат:</b> высокие свойства проб масла на всем периоде эксплуатации</p>
+                  <a href="#" data-popup="#evidencePopup_2" class="btn">Результаты теста</a>
+                </div>
+                <div class="item-evidence__image">
+                  <img src="img/evidence_1.png" alt="item-evidence_1" class="_md3dn">
+                  <img src="img/evidence_mob_1.png" alt="item-evidence_1" class="_mmd3dn">
+                  <p class="item-evidence__imgtext" data-da=".item-evidence__head, 767, first">на такси</p>
+                </div>
+              </div>
+              <div class="evidence__item item-evidence" data-da-parent>
+                <div class="item-evidence__head">
+                  <div class="item-evidence__title">>100 000 км</div>
+                  <div class="item-evidence__subtitle">пробега <br class="_md3dn"> на масле SINTEC</div>
+                </div>
+                <div class="item-evidence__text">
+                  <p><b>Результат:</b> высокие свойства проб масла на всем периоде эксплуатации</p>
+                  <a href="#" data-popup="#evidencePopup_1" class="btn">Результаты теста</a>
+                </div>
+                <div class="item-evidence__image">
+                  <img src="img/evidence_2.png" alt="item-evidence_2" class="_md3dn">
+                  <img src="img/evidence_mob_2.png" alt="item-evidence_2" class="_mmd3dn">
+                  <p class="item-evidence__imgtext" data-da=".item-evidence__head, 767, first">НА КИТАЙСКИХ АВТО</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
-        <section class="assort">
+        <section class="assort" data-watch data-watch-once data-watch-threshold="0.5">
           <div class="assort__container">
             <div class="assort__title">ассортимент с вязкостью OW&#8209;XX</div>
             <div class="splide assort__slider">
@@ -537,7 +574,7 @@
             </div>
           </div>
         </section>
-        <section class="ozon">
+        <section class="ozon" data-watch data-watch-once data-watch-threshold="1">
           <div class="ozon__container">
             <div class="ozon__title">купить на ozon прямо сейчас</div>
             <a 

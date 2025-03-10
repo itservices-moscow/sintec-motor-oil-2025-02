@@ -4,7 +4,7 @@ import {Splide} from '@splidejs/splide';
 
 // or only core styles
 import '@splidejs/splide/css/core';
-import { debounce } from './functions';
+import { debounce, isMobile } from './functions';
 
 
 
@@ -51,10 +51,10 @@ function initSliders() {
       perPage: 1,
       autoWidth: true,
       dragMinThreshold: {
-        touch: 60
+        touch: navigator.userAgent.match(/Mac OS/i)||isMobile.iOS() ? 160 : 60
       },
-      wheel: navigator.userAgent.match(/Mac OS/i),
-      speed: 700,
+      wheel: navigator.userAgent.match(/Mac OS/i)||isMobile.iOS(),
+      speed: 1000,
     })
 
     let bar = splide.root.querySelector('.assort__progress i');

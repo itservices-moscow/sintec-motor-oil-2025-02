@@ -514,7 +514,7 @@
 }
 .item-advantages {
   background-color: var(--light);
-  border-radius: 15px;
+  border-radius: mixins.toRem(15);
   padding: mixins.toRem(20);
   opacity: 0;
   translate: 0 mixins.toRem(30);
@@ -566,6 +566,7 @@
     background: linear-gradient(276.61deg, #BC1F29 -2.76%, #E2000F 98.82%);
     pointer-events: none;
     opacity: 0;
+    border-radius: mixins.toRem(15);
 
     .loaded & {
       transition: opacity 0.3s ease 0s;

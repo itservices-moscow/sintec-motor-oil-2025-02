@@ -54,6 +54,7 @@ function initSliders() {
         touch: 40
       },
       wheel: true,
+      speed: 700,
     })
 
     let bar = splide.root.querySelector('.assort__progress i');

@@ -14,6 +14,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
   setIndex('.item-advantages');
   setIndex('.item-evidence');
   setIndex('.assort__slide');
+
+  const techItemWraps = document.querySelectorAll('.right-tech__itemwrap');
+  if (techItemWraps.length) {
+    setTechItemStyle(techItemWraps);
+  }
+})
+
+window.addEventListener('resize', (e)=>{
+  const techItemWraps = document.querySelectorAll('.right-tech__itemwrap');
+  if (techItemWraps.length) {
+    setTechItemStyle(techItemWraps);
+  }
 })
 
 
@@ -51,5 +63,18 @@ function setIndex(selector) {
 
   items.forEach((el, i)=>{
     el.style.setProperty('--index', i+1);
+  })
+}
+
+function setTechItemStyle(techItemWraps) {
+  let w = 0;
+  techItemWraps.forEach((e, i)=>{
+    e.style.setProperty('--index', i+1);
+    e.closest('.tech__container')?.style.setProperty('--max_index', i+1)
+
+    const parent = e.closest('.right-tech');
+
+    let width = parent.offsetWidth;
+    e.style.setProperty('--width', `${width-4}px`);
   })
 }

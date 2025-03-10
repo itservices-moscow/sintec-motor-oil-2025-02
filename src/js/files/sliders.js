@@ -51,7 +51,7 @@ function initSliders() {
       perPage: 1,
       autoWidth: true,
       dragMinThreshold: {
-        touch: 40
+        touch: 60
       },
       wheel: true,
       speed: 700,

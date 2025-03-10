@@ -216,3 +216,28 @@ img {
   object-fit: contain;
   object-position: top left;
 }
+
+.scrollbar {
+  position: absolute;
+  left: mixins.toRem(15);
+  bottom: var(--bottom, #{mixins.toRem(140)});
+  height: mixins.toRem(3);
+  width: calc(100vw - mixins.toRem(30));
+  background-color: var(--scrollbar_bg);
+  border-radius: mixins.toRem(9999999);
+  overflow: hidden;
+
+  @media (min-width:mixins.toEm(variables.$mobile)){
+    display: none;
+  }
+
+  i {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    background-color: var(--red);
+    width: var(--width);
+    border-radius: mixins.toRem(9999999);
+    translate: var(--translate, 0) 0;
+  }
+}

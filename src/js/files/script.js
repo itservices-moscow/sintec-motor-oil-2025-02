@@ -5,6 +5,7 @@ import { mhzModules } from "./modules.js";
 import { gotoBlock } from "./scroll/gotoblock.js";
 
 const mmd1 = matchMedia('(min-width: 1920px)');
+const md3 = matchMedia('(min-width: 1920px)');
 
 document.addEventListener('DOMContentLoaded', ()=>{
   if (mmd1.matches) {
@@ -19,12 +20,28 @@ document.addEventListener('DOMContentLoaded', ()=>{
   if (techItemWraps.length) {
     setTechItemStyle(techItemWraps);
   }
+
+  const advantagesBody = document.querySelector('.advantages__body');
+  let condition = 
+    advantagesBody
+    // &&isMobile.iOS();
+  if (condition) {
+    setScrollbar(advantagesBody);
+  }
 })
 
 window.addEventListener('resize', (e)=>{
   const techItemWraps = document.querySelectorAll('.right-tech__itemwrap');
   if (techItemWraps.length) {
     setTechItemStyle(techItemWraps);
+  }
+
+  const advantagesBody = document.querySelector('.advantages__body');
+  let condition = 
+    advantagesBody
+    // &&isMobile.iOS();
+  if (condition) {
+    setScrollbar(advantagesBody);
   }
 })
 
@@ -77,4 +94,35 @@ function setTechItemStyle(techItemWraps) {
     let width = parent.offsetWidth;
     e.style.setProperty('--width', `${width-4}px`);
   })
+}
+
+function setScrollbar(parent) {
+  if (parent.offsetWidth >= parent.scrollWidth) return;
+  const scrollbar = createScrollbar(parent);
+
+  if (!scrollbar) return;
+
+  const diff = ((parent.offsetWidth / parent.scrollWidth) * 100).toFixed(2);
+  scrollbar.style.setProperty('--width', `${diff}%`);
+
+  if (parent.isHandled) return;
+
+  parent.isHandled = true;
+  parent.addEventListener('scroll', (e) => {
+    const prc = ((parent.scrollLeft / parent.scrollWidth) * 165).toFixed(2);
+    console.log(prc);
+    parent.style.setProperty('--translate', `${prc}%`)
+  })
+}
+
+function createScrollbar(parent) {
+  if (parent.querySelector('.scrollbar')) return parent.querySelector('.scrollbar');
+
+  const scrollbar = document.createElement('div');
+  scrollbar.classList.add('scrollbar');
+  scrollbar.innerHTML = '<i></i>';
+
+  parent.append(scrollbar);
+
+  return scrollbar;
 }

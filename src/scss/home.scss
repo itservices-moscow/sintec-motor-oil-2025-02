@@ -423,6 +423,7 @@
     padding-bottom: mixins.toRem(140);
     max-width: mixins.toRem(1320);
     display: grid;
+    position: relative;
     @include mixins.adaptiveValue("gap", 132, 40);
     
     @media (min-width:mixins.toEm(variables.$tablet)){
@@ -493,6 +494,7 @@
       padding-right: mixins.toRem(15);
       &::-webkit-scrollbar {
         height: mixins.toRem(3);
+        display: none;
       }
     }
   }
@@ -512,7 +514,7 @@
 }
 .item-advantages {
   background-color: var(--light);
-  border-radius: mixins.toRem(15);
+  border-radius: 15px;
   padding: mixins.toRem(20);
   opacity: 0;
   translate: 0 mixins.toRem(30);
@@ -1833,9 +1835,7 @@
   }
 
   &__list {
-    @media (max-width:mixins.toEm(variables.$mobile)){
-      align-items: flex-start;
-    }
+    align-items: stretch;
   }
 
   &__slide {

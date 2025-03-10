@@ -53,7 +53,7 @@ function initSliders() {
       dragMinThreshold: {
         touch: 60
       },
-      wheel: true,
+      wheel: navigator.userAgent.match(/Mac OS/i),
       speed: 700,
     })
 
@@ -75,11 +75,11 @@ function initSliders() {
       } );
     }
 
-    if (navigator.userAgent.match(/Mac OS/i)) {
-      splide.root.addEventListener('mousewheel', (e)=>{
-        onWheel(e, splide);
-      })
-    }
+    // if (navigator.userAgent.match(/Mac OS/i)) {
+    //   splide.root.addEventListener('mousewheel', (e)=>{
+    //     onWheel(e, splide);
+    //   })
+    // }
 
     splide.mount();
   }

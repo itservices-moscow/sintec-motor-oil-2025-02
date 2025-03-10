@@ -109,9 +109,12 @@ function setScrollbar(parent) {
 
   parent.isHandled = true;
   parent.addEventListener('scroll', (e) => {
-    const prc = ((parent.scrollLeft / parent.scrollWidth) * 165).toFixed(2);
-    console.log(prc);
-    parent.style.setProperty('--translate', `${prc}%`)
+    const offsetWidth = parent.offsetWidth;
+    const scrollLeft = parent.scrollLeft;
+    const scrollWidth = parent.scrollWidth;
+
+    const prc = (offsetWidth / scrollWidth) * scrollLeft;
+    scrollbar.style.setProperty('--translate', `${prc}px`)
   })
 }
 

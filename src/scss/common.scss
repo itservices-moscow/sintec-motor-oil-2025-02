@@ -238,6 +238,6 @@ img {
     background-color: var(--red);
     width: var(--width);
     border-radius: mixins.toRem(9999999);
-    translate: var(--translate, 0) 0;
+    translate: var(--translate, 0%) 0;
   }
 }

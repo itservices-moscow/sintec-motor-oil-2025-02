@@ -500,12 +500,6 @@
   }
 
   &__item {
-    .loaded & {
-      transition: 
-        translate var(--globalAnimDuration) var(--globalTransitionTiming),
-        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
-      transition-delay: calc(0);
-    }
     @media (max-width:mixins.toEm(variables.$mobile)){
       flex: 1 0 mixins.toRem(227);
       scroll-snap-align: start;
@@ -1015,6 +1009,7 @@
   position: relative;
   min-height: mixins.toRem(520);
   display: flex;
+  --animDuration: calc(var(--globalAnimDuration) * 0.55);
 
   &__bgs {
     position: absolute;
@@ -1220,10 +1215,10 @@
     
     .loaded & {
       transition: 
-        translate var(--globalAnimDuration) var(--globalTransitionTiming),
-        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+        translate var(--animDuration) var(--globalTransitionTiming),
+        opacity var(--animDuration) var(--globalTransitionTiming);
 
-        transition-delay: calc(var(--globalAnimDuration) * (var(--max_index, 2) + 2.5));
+        transition-delay: calc(var(--animDuration) * (var(--max_index, 2) + 2.5));
     }
 
     .loaded ._watcher-view & {
@@ -1264,9 +1259,9 @@
     
         .loaded & {
           transition: 
-            padding var(--globalAnimDuration) var(--globalTransitionTiming);
+            padding var(--animDuration) var(--globalTransitionTiming);
     
-            transition-delay: calc(var(--globalAnimDuration) * (var(--index) + 2));
+            transition-delay: calc(var(--animDuration) * (var(--index) + 2));
         }
 
         .loaded ._watcher-view & {
@@ -1291,10 +1286,10 @@
     
     .loaded & {
       transition: 
-        scale var(--globalAnimDuration) var(--globalTransitionTiming),
-        padding var(--globalAnimDuration) var(--globalTransitionTiming);
+        scale var(--animDuration) var(--globalTransitionTiming),
+        padding var(--animDuration) var(--globalTransitionTiming);
 
-      transition-delay: calc(var(--globalAnimDuration) * var(--index, 1)), calc(var(--globalAnimDuration) * (var(--index) + 1));
+      transition-delay: calc(var(--animDuration) * var(--index, 1)), calc(var(--animDuration) * (var(--index) + 1));
     }
 
     .loaded ._watcher-view & {
@@ -1316,9 +1311,9 @@
     
     .loaded & {
       transition: 
-        scale var(--globalAnimDuration) var(--globalTransitionTiming);
+        scale var(--animDuration) var(--globalTransitionTiming);
 
-      transition-delay: calc((var(--globalAnimDuration) / 2) * var(--index, 1));
+      transition-delay: calc((var(--animDuration) / 2) * var(--index, 1));
     }
     img {
       width: 100%;
@@ -1344,10 +1339,10 @@
     
     .loaded & {
       transition: 
-        translate var(--globalAnimDuration) var(--globalTransitionTiming),
-        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+        translate var(--animDuration) var(--globalTransitionTiming),
+        opacity var(--animDuration) var(--globalTransitionTiming);
 
-      transition-delay: calc(var(--globalAnimDuration) * (var(--index, 1) + 2));
+      transition-delay: calc(var(--animDuration) * (var(--index, 1) + 2));
     }
 
     @media (min-width:mixins.toEm(variables.$tablet)){
@@ -1964,8 +1959,13 @@
 }
 //==========================================================================================
 .ozon {
+  opacity: 0;
+  translate: 0 mixins.toRem(30);
+
   .loaded & {
-    transition: all var(--globalAnimDuration) var(--globalTransitionTiming);
+    transition: 
+      translate var(--globalAnimDuration) var(--globalTransitionTiming),
+      opacity var(--globalAnimDuration) var(--globalTransitionTiming);
   }
   @media (min-width:mixins.toEm(variables.$mobile)){
     border-radius: mixins.toRem(20) mixins.toRem(20) 0 0;
@@ -1979,12 +1979,27 @@
     background-position: 70% 70%;
   }
 
+  .loaded &._watcher-view {
+    opacity: 1;
+    translate: 0 0;
+  }
+
   &__container {
+    opacity: 0;
+    translate: 0 mixins.toRem(30);
     display: flex;
     justify-content:center;align-items: center;
     padding-bottom: mixins.toRem(68);
     padding-left: mixins.toRem(20);
     padding-right: mixins.toRem(20);
+
+    .loaded & {
+      transition: 
+        translate var(--globalAnimDuration) var(--globalTransitionTiming),
+        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+      
+      transition-delay: calc(var(--globalAnimDuration) * 0.7);
+    }
 
     @include mixins.adaptiveValue("padding-top", 65, 50);
     @include mixins.adaptiveValue("gap", 79, 30, 1320, 767);
@@ -1993,11 +2008,14 @@
       flex-direction: column;
       text-align: center;
     }
+
+    .loaded ._watcher-view & {
+      opacity: 1;
+      translate: 0 0;
+    }
   }
 
   &__title {
-    opacity: 0;
-    translate: 0 mixins.toRem(30);
     color: var(--white);
     text-transform: uppercase;
     line-height: math.div(33.8 , 26);
@@ -2006,38 +2024,12 @@
     }
 
     @include mixins.adaptiveValue("font-size", 32, 26);
-
-    .loaded & {
-      transition: 
-        translate var(--globalAnimDuration) var(--globalTransitionTiming),
-        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
-    }
-
-    .loaded ._watcher-view & {
-      opacity: 1;
-      translate: 0 0;
-    }
   }
 
   &__button {
     width: 100%;
     max-width: mixins.toRem(427);
     border-radius: mixins.toRem(7.84);
-    opacity: 0;
-    translate: 0 mixins.toRem(30);
-
-    .loaded & {
-      transition: 
-        translate var(--globalAnimDuration) var(--globalTransitionTiming),
-        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
-
-      transition-delay: calc(var(--globalAnimDuration) / 2);
-    }
-
-    .loaded ._watcher-view & {
-      opacity: 1;
-      translate: 0 0;
-    }
 
     @include mixins.adaptiveValue("font-size", 32, 18);
     @include mixins.adaptiveValue("height", 69, 58);
@@ -2047,17 +2039,45 @@
 .footer {
   background-color: var(--red);
   color: var(--light);
+  opacity: 0;
+  translate: 0 mixins.toRem(30);
+  .loaded & {
+    transition: 
+      translate var(--globalAnimDuration) var(--globalTransitionTiming),
+      opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+      
+    transition-delay: calc(var(--globalAnimDuration) * 0.7);
+  }
+
+  .loaded &._watcher-view {
+    opacity: 1;
+    translate: 0 0;
+  }
 
   &__container {
     display: flex;
     align-items: flex-start;
     gap: mixins.toRem(10);
     justify-content: space-between;
-
     max-width: mixins.toRem(1320);
+    opacity: 0;
+    translate: 0 mixins.toRem(30);
+
+    .loaded & {
+      transition: 
+        translate var(--globalAnimDuration) var(--globalTransitionTiming),
+        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
+        
+      transition-delay: calc(var(--globalAnimDuration) * 1.4);
+    }
 
     @include mixins.adaptiveValue("padding-top", 80, 39);
     @include mixins.adaptiveValue("padding-bottom", 120, 71);
+
+    .loaded ._watcher-view & {
+      opacity: 1;
+      translate: 0 0;
+    }
 
     @media (max-width:mixins.toEm(variables.$mobile)){
       flex-direction: column;
@@ -2070,23 +2090,6 @@
   &__col {
     display: flex;
     flex-direction: column;
-    opacity: 0;
-    translate: 0 mixins.toRem(30);
-
-    .loaded & {
-      transition: 
-        translate var(--globalAnimDuration) var(--globalTransitionTiming),
-        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
-      
-      &:last-child {
-        transition-delay: var(--globalAnimDuration);
-      }
-    }
-
-    .loaded ._watcher-view & {
-      opacity: 1;
-      translate: 0 0;
-    }
 
     a {
       display: block;
@@ -2113,16 +2116,6 @@
 
   &__logo {
     height: mixins.toRem(57);
-    opacity: 0;
-    translate: 0 mixins.toRem(30);
-
-    .loaded & {
-      transition: 
-        translate var(--globalAnimDuration) var(--globalTransitionTiming),
-        opacity var(--globalAnimDuration) var(--globalTransitionTiming);
-
-      transition-delay: calc(var(--globalAnimDuration) / 2);
-    }
 
     img {
       height: 100%;
@@ -2130,11 +2123,6 @@
 
     @media (max-width:mixins.toEm(variables.$mobile)){
       order: -1;
-    }
-
-    .loaded ._watcher-view & {
-      opacity: 1;
-      translate: 0 0;
     }
   }
 }

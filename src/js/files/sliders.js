@@ -53,7 +53,6 @@ function initSliders() {
       dragMinThreshold: {
         touch: navigator.userAgent.match(/Mac OS/i)||isMobile.iOS() ? 160 : 60
       },
-      wheel: navigator.userAgent.match(/Mac OS/i)||isMobile.iOS(),
       speed: 1000,
     })
 
@@ -61,25 +60,11 @@ function initSliders() {
 
     if (bar) {
       splide.on( 'mounted move', function () {
-        // let end  = splide.Components.Controller.getEnd() + 1;
-        // let rate = Math.min( ( splide.index + 1 ) / end, 1 );
-        // let width = 100 / end;
-        // let translate = splide.Components.Controller.getIndex() * 100;
-        // bar.style.width = String( width ) + '%';
-        // bar.style.translate =`${translate}% 0%`;
-
-        
         var end  = splide.Components.Controller.getEnd() + 1;
         var rate = Math.min( ( splide.index + 1 ) / end, 1 );
         bar.style.width = String( 100 * rate ) + '%';
       } );
     }
-
-    // if (navigator.userAgent.match(/Mac OS/i)) {
-    //   splide.root.addEventListener('mousewheel', (e)=>{
-    //     onWheel(e, splide);
-    //   })
-    // }
 
     splide.mount();
   }

@@ -7,6 +7,10 @@ import { gotoBlock } from "./scroll/gotoblock.js";
 const mmd1 = matchMedia('(min-width: 1920px)');
 const md3 = matchMedia('(min-width: 1920px)');
 
+if (navigator.userAgent.match(/Mac OS/i)) {
+  document.documentElement.classList.add('_ismac');
+}
+
 document.addEventListener('DOMContentLoaded', ()=>{
   if (mmd1.matches) {
     setSvgWH();

@@ -29,8 +29,9 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center;
-      @include mixins.adaptiveValue("border-radius", 20, 10);
+      object-position: bottom center;
+      border-radius: 0 0 var(--border-radius) var(--border-radius);
+      @include mixins.adaptiveValue("--border-radius", 20, 10);
     }
     @media (max-width: mixins.toEm(1200)) and (min-width:mixins.toEm(variables.$mobile)) {
       img {

@@ -6,7 +6,11 @@ export async function htmlReplacer() {
   let config;
 
   const transformIndexHtml = (html) => {
-    return html.replaceAll('/assets', 'assets');
+    let answer = html;
+    answer = answer.replaceAll('crossorigin', '');
+    answer = answer.replaceAll('script type="module"', 'script defer');
+    answer = answer.replaceAll('/assets', 'assets');
+    return answer;
   }
 
   return {
